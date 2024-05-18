@@ -51,3 +51,121 @@ public class SimpleCalculator {
         scanner.close();
     }
 }
+
+# online examination
+import java.util.Scanner;
+
+public class OnlineExamSystem {
+    static Scanner scanner = new Scanner(System.in);
+    static String username;
+    static String password;
+
+    public static void main(String[] args) {
+        login();
+        displayMenu();
+    }
+
+    static void login() {
+        System.out.println("Welcome to the Online Exam System!");
+        System.out.print("Enter username: ");
+        username = scanner.nextLine();
+        System.out.print("Enter password: ");
+        password = scanner.nextLine();
+        // Validate username and password (you can use a database for this)
+        // If validation fails, handle accordingly (e.g., loop back to login)
+    }
+
+    static void displayMenu() {
+        int choice;
+        do {
+            System.out.println("\nMain Menu:");
+            System.out.println("1. Update Profile and Password");
+            System.out.println("2. Start Exam");
+            System.out.println("3. Logout");
+            System.out.print("Enter your choice: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline character
+
+            switch (choice) {
+                case 1:
+                    updateProfileAndPassword();
+                    break;
+                case 2:
+                    startExam();
+                    break;
+                case 3:
+                    logout();
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != 3);
+    }
+
+    static void updateProfileAndPassword() {
+        // Implement profile and password update logic
+        System.out.println("Profile and Password update feature not implemented in this demo.");
+    }
+
+    static void startExam() {
+        // Implement exam logic
+        System.out.println("Starting exam...");
+        // Display questions, timer, handle MCQs selection, auto-submit, etc.
+        // Example:
+        int totalQuestions = 5;
+        int[] answers = new int[totalQuestions]; // Assuming MCQs have 4 options (A, B, C, D)
+        for (int i = 0; i < totalQuestions; i++) {
+            System.out.println("Question " + (i + 1) + ":");
+            System.out.println("A. Option A");
+            System.out.println("B. Option B");
+            System.out.println("C. Option C");
+            System.out.println("D. Option D");
+            System.out.print("Your choice (A/B/C/D): ");
+            String choice = scanner.nextLine().toUpperCase();
+            switch (choice) {
+                case "A":
+                    answers[i] = 1;
+                    break;
+                case "B":
+                    answers[i] = 2;
+                    break;
+                case "C":
+                    answers[i] = 3;
+                    break;
+                case "D":
+                    answers[i] = 4;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Skipping question.");
+                    break;
+            }
+        }
+        // Timer logic (you can use threads for this)
+        int examDurationInMinutes = 30;
+        int remainingTimeInSeconds = examDurationInMinutes * 60;
+        while (remainingTimeInSeconds > 0) {
+            System.out.println("Time remaining: " + remainingTimeInSeconds + " seconds");
+            // Sleep for 1 second (simulate time ticking)
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            remainingTimeInSeconds--;
+        }
+        System.out.println("Time's up! Auto-submitting exam...");
+        // Submit exam (process answers, calculate score, etc.)
+        // Example: displayResults(answers);
+        // For demo purposes, we'll just simulate the end of the exam
+        System.out.println("Exam submitted successfully.");
+        displayMenu(); // Go back to the main menu
+    }
+
+    static void logout() {
+        System.out.println("Logging out...");
+        // Clear session data, reset variables, etc.
+        username = null;
+        password = null;
+        System.out.println("Logged out successfully.");
+    }
+}
